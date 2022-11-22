@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+    socks5:
+        image: teopost/docker-socks5
+        container_name: socks5
+        #restart: always
+        ports:
+            - 60000:1080
+        volumes:
+            - ./hosts.d:/app/hosts.d
+            - ./www:/app/www
+
+    nginx:
+        image: nginx:alpine
+        restart: always
+        container_name: nginx
+        ports:
+            - 80:80
+        volumes:
+            - ./www:/usr/share/nginx/html
